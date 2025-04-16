@@ -31,10 +31,15 @@
     <Content Include="pyproject.toml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\core\__init__.py" />
+    <Compile Include="src\core\sort_type.py" />
     <Compile Include="src\core\convert_cyrillic_to_hex.py" />
     <Compile Include="src\core\wb_search.py" />
     <Compile Include="src\main.py" />
     <Compile Include="src\__init__.py" />
+    <Compile Include="tests\test_wbsearch.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="tests\__init__.py" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />

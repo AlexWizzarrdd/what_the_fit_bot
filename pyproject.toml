@@ -23,4 +23,4 @@ dev = ["pytest>=7.0"]  # pip install .[dev]
 
 [tool.setuptools]
 packages = ["core"]  
-package-dir = {"" = "src"} 
+package-dir = {"" = "src"}

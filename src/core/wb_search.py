@@ -1,6 +1,7 @@
 import requests
+from .sort_type import SortType
 
-def search(query: str):
+def search(query: str, sort: SortType):
     
     payload = {
     'ab_vector_qi_from': 'extend_cos',
@@ -12,12 +13,9 @@ def search(query: str):
     'page': '1',
     'query': query,
     'resultset': 'catalog',
-    'sort': 'popular',
+    'sort': sort,
     'spp': '1',
     'suppressSpellcheck': 'false',
     }
 
     return requests.get('https://search.wb.ru/exactmatch/ru/common/v9/search', params=payload)
-
-
-
