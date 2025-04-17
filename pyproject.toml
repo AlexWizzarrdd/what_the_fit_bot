@@ -16,11 +16,16 @@ dependencies = [
     "idna==3.10",
     "pip==25.0.1",
     "urllib3==2.3.0",
+    "setuptools==78.1.0"
 ]
 
 [project.optional-dependencies]
-dev = ["pytest>=7.0"]  # pip install .[dev]
+dev = ["pytest>=8.3.5"]  # pip install .[dev]
 
 [tool.setuptools]
-packages = ["core"]  
+packages = { find = { where = ["src"] } }  
 package-dir = {"" = "src"}
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]    
+testpaths = ["tests"]   
