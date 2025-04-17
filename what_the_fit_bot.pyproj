@@ -12,6 +12,9 @@
     <Name>what_the_fit_bot</Name>
     <RootNamespace>what_the_fit_bot</RootNamespace>
     <IsWindowsApplication>False</IsWindowsApplication>
+    <TestFramework>Pytest</TestFramework>
+    <InterpreterId>
+    </InterpreterId>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -37,10 +40,13 @@
     <Compile Include="src\core\wb_search.py" />
     <Compile Include="src\main.py" />
     <Compile Include="src\__init__.py" />
-    <Compile Include="tests\test_wbsearch.py">
+    <Compile Include="tests\test_wb_search.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="tests\__init__.py" />
+  </ItemGroup>
+  <ItemGroup>
+    <InterpreterReference Include="Global|PythonCore|3.13" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\Python Tools\Microsoft.PythonTools.targets" />
   <!-- Uncomment the CoreCompile target to enable the Build command in
