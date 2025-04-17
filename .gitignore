@@ -361,3 +361,7 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Some built local files
+what_the_fit_bot.egg-info
+what_the_fit_bot.pyproj
