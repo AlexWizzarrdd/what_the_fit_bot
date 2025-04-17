@@ -1,6 +1,6 @@
 from enum import Enum
 
-
+# Made for more readble code. Choose what you need.
 class SortType(Enum):
     POPULAR = 'popular' 
     RATE = 'rate'

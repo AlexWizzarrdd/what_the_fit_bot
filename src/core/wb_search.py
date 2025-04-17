@@ -1,6 +1,7 @@
 import requests
 from .sort_type import SortType
 
+# looks pretty understandable
 def search(query: str, sort: SortType):
     
     payload = {
