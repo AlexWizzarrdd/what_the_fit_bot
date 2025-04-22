@@ -365,3 +365,4 @@ FodyWeavers.xsd
 # Some local build Files
 *.egg-info
 *.pyproj
+*.sln
