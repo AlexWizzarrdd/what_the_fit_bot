@@ -1,8 +1,11 @@
 ﻿from core.sort_type import SortType
-from core.wb_search import search
+from core.wb_search import search_by_id, search_by_query
+from core.products import Products
+from core.product import Product
 import requests
 
-response = search('синяя куртка', SortType.RATE)
-json_dict = response.json()
-print(response.status_code)
-print(json_dict)
+products = Products('белая куртка', SortType.POPULAR.value)
+
+for product_id in products.yiled_id():
+    product = Product(product_id)
+    print(product)
