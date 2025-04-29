@@ -10,3 +10,6 @@ class Products:
     def yiled_id(self):
         for product in self.__products: 
             yield product['id']
+
+    def get_id(self, product_index: int):
+        return self.__products[product_index]['id']
