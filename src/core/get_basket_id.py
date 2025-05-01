@@ -1,6 +1,10 @@
-# Get basket id according to the product id initial part
-
 def get_basket_id(product_id: int):
+
+    """
+    Return basket id according to the product id initial part. 
+    Basket is special server for product images
+    """
+
     short_product_id = product_id // 100000
     if short_product_id < 144:
         return '01'
