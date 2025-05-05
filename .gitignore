@@ -362,7 +362,10 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 
-# Some local build Files
+# Local build files
 *.egg-info
 *.pyproj
 *.sln
+
+# Local folders
+images
