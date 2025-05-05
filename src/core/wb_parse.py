@@ -4,7 +4,6 @@ from core.sort_type import SortType
 
 
 def parse_products_data(query: str, sort_type: SortType = SortType.POPULAR.value, product_amount: int = 3):
-    products = Products(query, sort_type)
     
     """
     Return wildberries products data from query printing process.
@@ -25,11 +24,11 @@ def parse_products_data(query: str, sort_type: SortType = SortType.POPULAR.value
     }
     """
 
+    products = Products(query, sort_type)
     products_data = {}
 
     for i in range(product_amount):
-        product_id = products.get_id(i)
-        product = Product(product_id)
+        product = Product(products, i)
         current_attributes = product.__dict__
         for ignored_attribute in product.ignored_attributes:
             del current_attributes[ignored_attribute] # delete attributes that we don't want user to see

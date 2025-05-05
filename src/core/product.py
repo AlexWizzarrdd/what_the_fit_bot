@@ -1,3 +1,4 @@
+from core.products import Products
 import requests
 from .sort_type import SortType
 from .wb_search import search_by_id, search_by_query
@@ -7,34 +8,40 @@ from core.image import convert_to_png, save_image, scrap_image
 class Product:
 
     """
-    Product which is executed from products by id.
+    Product which is executed from products by product index.
 
     Attributes:
     ignored_attributes (tuple): attributes that we don't want to print. 
     """
 
     ignored_attributes = ('_Product__data', 
-                          '_Product__image_folder_path'
+                          '_Product__image_folder_path',
+                          '_Product__id'
                          )
 
-    def __init__(self, product_id: int):
-        self.__data = search_by_id(product_id).json()['data']['products'][0]
-        self.__link = f"https://www.wildberries.ru/catalog/{product_id}/detail.aspx"
+    def __init__(self, products: Products, product_index: int):
+        self.__data = products.products_data[product_index]
+        self.__id = self.__data['id']
+        self.__link = f"https://www.wildberries.ru/catalog/{self.__id}/detail.aspx"
         self.__brand = self.__data['brand']
         self.__name = self.__data['name']
         self.__price = self.__parse_price() 
         self.__review_rating = self.__data['reviewRating']
         self.__supplier_rating = self.__data['supplierRating']
         self.__image_link = ( 
-            f"https://basket-{get_basket_id(product_id)}.wbbasket.ru/vol{product_id // 10**5}/"
-            f"part{product_id // 10**3}/{product_id}/images/big/1.webp" 
+            f"https://basket-{get_basket_id(self.__id)}.wbbasket.ru/vol{self.__id // 10**5}/"
+            f"part{self.__id // 10**3}/{self.__id}/images/big/1.webp" 
         )
-        self.__image_folder_path = f".\\images\\{product_id}"
+        self.__image_folder_path = f".\\images\\{self.__id}"
         self.__image_path = save_image(self.__image_link, self.__image_folder_path)
 
     @property
-    def data(self):
+    def product_data(self):
         return self.__data
+
+    @property
+    def id(self):
+        return self.__id
 
     @property
     def link(self):
@@ -86,11 +93,7 @@ class Product:
         while finally get It
         """
 
-        for i in range(len(self.__data['sizes']) - 1): 
-            try:
-                price = self.__data['sizes'][i]['price']['product'] // 100
-                return f"{price:,}" # return readable price
-            except :
-                continue
+        price = self.__data['sizes'][0]['price']['product'] // 100
+        return f"{price:,}" # return readable price
 
 
