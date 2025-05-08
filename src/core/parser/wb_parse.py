@@ -1,9 +1,9 @@
-from core.product import Product
-from core.products import Products
-from core.sort_type import SortType
+from core.parser.product import Product
+from core.parser.products import Products
+from core.parser.sort_type import SortType
 
 
-def parse_products_data(query: str, sort_type: SortType = SortType.POPULAR.value, product_amount: int = 3):
+def wb_parse(query: str, sort_type: SortType = SortType.POPULAR.value, product_amount: int = 3):
     
     """
     Return wildberries products data from query printing process.

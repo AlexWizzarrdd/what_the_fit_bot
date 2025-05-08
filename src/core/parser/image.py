@@ -3,7 +3,7 @@ import requests
 import re
 import os
 from PIL import Image
-from core.get_basket_id import get_basket_id
+from core.parser.get_basket_id import get_basket_id
 import time
 
 def scrap_image(image_link: str, image_folder_path: str):

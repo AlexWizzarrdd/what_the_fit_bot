@@ -2,7 +2,7 @@ import requests
 from .sort_type import SortType
 
 # looks pretty understandable
-def search_by_query(query: str, sort: SortType):
+def search_by_query(query: str, sort_type: SortType):
     
     payload = {
     'ab_vector_qi_from': 'extend_cos',
@@ -14,7 +14,7 @@ def search_by_query(query: str, sort: SortType):
     'page': '1',
     'query': query,
     'resultset': 'catalog',
-    'sort': sort,
+    'sort': sort_type,
     'spp': '1',
     'suppressSpellcheck': 'false',
     }

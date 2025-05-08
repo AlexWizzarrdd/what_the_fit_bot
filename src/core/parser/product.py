@@ -1,9 +1,9 @@
-from core.products import Products
+from core.parser.products import Products
 import requests
 from .sort_type import SortType
 from .wb_search import search_by_id, search_by_query
-from core.get_basket_id import get_basket_id
-from core.image import convert_to_png, save_image, scrap_image
+from core.parser.get_basket_id import get_basket_id
+from core.parser.image import convert_to_png, save_image, scrap_image
 
 class Product:
 

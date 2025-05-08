@@ -1,5 +1,5 @@
-﻿from core.get_basket_id import get_basket_id
-from core.image import save_image
+﻿from core.parser.get_basket_id import get_basket_id
+from core.parser.image import save_image
 import requests
 from .sort_type import SortType
 from .wb_search import search_by_id, search_by_query
