@@ -1,4 +1,3 @@
-from core.parser.products import Products
 import requests
 from .sort_type import SortType
 from .wb_search import search_by_id, search_by_query
@@ -8,7 +7,7 @@ from core.parser.image import convert_to_png, save_image, scrap_image
 class Product:
 
     """
-    Product which is executed from products by product index.
+    Product which is parsed from products data.
 
     Attributes:
     ignored_attributes (tuple): attributes that we don't want to print. 
@@ -19,8 +18,10 @@ class Product:
                           '_Product__id'
                          )
 
-    def __init__(self, products: Products, product_index: int):
-        self.__data = products.products_data[product_index]
+    def __init__(self, product_data: dict):
+        if not product_data:
+            raise ValueError("Empty dictionary was passed on")
+        self.__data = product_data
         self.__id = self.__data['id']
         self.__link = f"https://www.wildberries.ru/catalog/{self.__id}/detail.aspx"
         self.__brand = self.__data['brand']
@@ -79,7 +80,6 @@ class Product:
     def image_path(self):
         return self.__image_path
 
-    # make product printable
     def __str__(self):
         attributes = ''
         for attribute, value in vars(self).items():

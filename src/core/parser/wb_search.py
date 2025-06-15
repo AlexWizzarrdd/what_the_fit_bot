@@ -1,8 +1,7 @@
 import requests
 from .sort_type import SortType
 
-# looks pretty understandable
-def search_by_query(query: str, sort_type: SortType):
+def search_by_query(query: str, sort_type: SortType, show_high_rated_only: bool):
     
     payload = {
     'ab_vector_qi_from': 'extend_cos',
@@ -18,6 +17,9 @@ def search_by_query(query: str, sort_type: SortType):
     'spp': '1',
     'suppressSpellcheck': 'false',
     }
+
+    if show_high_rated_only:
+        payload["frating"] = "1"
 
     return requests.get('https://search.wb.ru/exactmatch/ru/common/v9/search', params=payload)
 
