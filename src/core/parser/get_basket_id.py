@@ -1,8 +1,11 @@
+# how do we get new basket info?
+# else how do we continue work without image?
+
 def get_basket_id(product_id: int):
 
     """
-    Return basket id according to the product id initial part. 
-    Basket is special server for product images
+    Return a basket id according to the product id initial part. 
+    Basket is a special server for product images
     """
 
     short_product_id = product_id // 100000
@@ -56,3 +59,10 @@ def get_basket_id(product_id: int):
         return '24'
     if short_product_id < 4566:
         return '25'
+    if short_product_id < 4878:
+        return '26'
+    if short_product_id < 5190:
+        return '27'
+    if short_product_id < 5502:
+        return '28'
+    raise ValueError("corresponding basket wasn't found")
