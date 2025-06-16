@@ -17,8 +17,9 @@ dependencies = [
     "pip==25.0.1",
     "urllib3==2.3.0",
     "setuptools==78.1.0",
-    "pillow==11.2.1"
-    "python-telegram-bot==22.1"
+    "pillow==11.2.1",
+    "python-telegram-bot==22.1",
+    "python-dotenv==1.1.0"
 ]
 
 [project.optional-dependencies]
