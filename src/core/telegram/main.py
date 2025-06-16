@@ -101,7 +101,7 @@ def main():
             ],
             FIND_PHOTO: [
                 MessageHandler(filters.PHOTO, handle_photo),
-                MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_router),
+                MessageHandler(filters.TEXT & filters.COMMAND, main_menu_router),
             ],
             STYLE_SELECT: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, style_select),
