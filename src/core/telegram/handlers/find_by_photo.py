@@ -9,7 +9,7 @@ from telegram.ext import ContextTypes
 from states import FIND_PHOTO
 from utils.navigation import return_to_main_menu
 
-from src.core.task_pool.pool import pool
+from core.task_pool.pool import pool
 
 async def find_by_photo_entry(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text("Пожалуйста, отправь мне фото")
