@@ -7,4 +7,8 @@
 
 from core.telegram import main
 
+
+# Hahah
+
+
 main.main()
