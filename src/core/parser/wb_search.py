@@ -1,4 +1,3 @@
-from unittest import result
 import requests
 from .sort_type import SortType
 

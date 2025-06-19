@@ -13,8 +13,7 @@ class Product:
     ignored_attributes (tuple): attributes that we don't want to print. 
     """
 
-    ignored_attributes = ('_Product__data', 
-                          '_Product__image_folder_path',
+    ignored_attributes = ('_Product__data',
                           '_Product__id'
                          )
 
@@ -33,7 +32,6 @@ class Product:
             f"https://basket-{get_basket_id(self.__id)}.wbbasket.ru/vol{self.__id // 10**5}/"
             f"part{self.__id // 10**3}/{self.__id}/images/big/1.webp" 
         )
-        self.__image_folder_path = f".\\images\\{self.__id}"
         self.__image_path = save_image(self.__image_link)
 
     @property
@@ -71,10 +69,6 @@ class Product:
     @property
     def image_link(self):
         return self.__image_link
-
-    @property
-    def folder_path(self):
-        return self.__image_folder_path
 
     @property
     def image_path(self):
