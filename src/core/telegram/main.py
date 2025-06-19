@@ -69,7 +69,7 @@ async def main_menu_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         keyboard = [
             ["Найти по фото"],
             ["🔒 Подбор по стилю"],
-            ["🔒 Общие рекомендации"],
+            ["Общие рекомендации"],
         ]
         await update.message.reply_text(
             "Что хочешь попробовать?",
@@ -80,9 +80,12 @@ async def main_menu_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif text in ["Загрузить ещё", "Найти по фото"]:
         return await find_by_photo_entry(update, context)
 
-    elif text in ["🔒 Подбор по стилю", "🔒 Общие рекомендации"]:
+    elif text == "🔒 Подбор по стилю":
         await update.message.reply_text("❌ Этот раздел пока недоступен.")
         return MENU_CHOICE
+
+    elif text == "Общие рекомендации":
+        return await general_recommend_entry(update, context)
 
     else:
         await update.message.reply_text("Я не понял. Пожалуйста, выбери пункт из меню.")
@@ -101,13 +104,12 @@ def main():
             ],
             FIND_PHOTO: [
                 MessageHandler(filters.PHOTO, handle_photo),
-                MessageHandler(filters.TEXT & filters.COMMAND, main_menu_router),
+                MessageHandler(filters.TEXT & ~filters.COMMAND, main_menu_router),
             ],
             STYLE_SELECT: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, style_select),
             ],
             STYLE_DETAIL: [
-                MessageHandler(filters.TEXT & ~filters.COMMAND, style_detail),
             ],
             GENERAL_RECOMMEND: [
                 MessageHandler(

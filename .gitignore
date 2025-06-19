@@ -316,6 +316,7 @@ paket-files/
 __pycache__/
 *.pyc
 build/
+.venv
 
 # Cake - Uncomment if you are using it
 # tools/**
@@ -373,3 +374,5 @@ images
 
 # Envirement
 .env
+
+

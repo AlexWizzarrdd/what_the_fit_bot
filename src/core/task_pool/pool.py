@@ -16,7 +16,7 @@ class TasksPool:
                     return semaphore
         return None
     
-    def handle(self):
+    def handle(self, path):
         semaphore = self.acquire()
         if semaphore == None:
             return None
