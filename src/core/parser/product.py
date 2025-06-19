@@ -34,7 +34,7 @@ class Product:
             f"part{self.__id // 10**3}/{self.__id}/images/big/1.webp" 
         )
         self.__image_folder_path = f".\\images\\{self.__id}"
-        self.__image_path = save_image(self.__image_link, self.__image_folder_path)
+        self.__image_path = save_image(self.__image_link)
 
     @property
     def product_data(self):
@@ -94,6 +94,8 @@ class Product:
         """
 
         price = self.__data['sizes'][0]['price']['product'] // 100
+        if not isinstance(price, (int, float)):
+            raise TypeError("Had tried to parse price but It wasn't number")
         return f"{price:,}" # return readable price
 
 
