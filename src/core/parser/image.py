@@ -46,7 +46,7 @@ def get_new_image_path(image_folder_path: str, file_extension: str):
         raise ValueError("Wrong folder path!")
     if not re.match(r"[a-z]+", file_extension):
         raise ValueError("Wrong folder path!")
-    image_path = f"{image_folder_path}\\image.{file_extension}"
+    image_path = os.path.join(image_folder_path, f"image.{file_extension}")
     time_stamp = time.strftime("%Y%m%d_%H%M%S")
     core, extension = os.path.splitext(image_path)
     return f"{core}_{time_stamp}{extension}"
