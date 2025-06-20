@@ -6,5 +6,7 @@
 #                          True, Criteria.has_feedbacks)
 
 from core.telegram import main
+from core.ai.image_processing import init_model
 
+init_model()
 main.main()

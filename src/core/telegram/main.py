@@ -17,7 +17,11 @@ from telegram.ext import (
 
 from handlers.pick_by_style import pick_style_entry, style_select, style_detail
 from handlers.find_by_photo import find_by_photo_entry, handle_photo
-from handlers.general_recommend import general_recommend_entry, handle_general_recommend
+from handlers.general_recommend import (
+    general_recommend_entry,
+    handle_gender_selection,
+    handle_general_recommend,  # ← обязательно импортируем
+)
 
 from states import (
     FIND_PHOTO,
@@ -25,6 +29,7 @@ from states import (
     STYLE_DETAIL,
     MENU_CHOICE,
     GENERAL_RECOMMEND,
+    GENDER_SELECT,
 )
 
 # Логирование
@@ -85,7 +90,7 @@ async def main_menu_router(update: Update, context: ContextTypes.DEFAULT_TYPE):
         return MENU_CHOICE
 
     elif text == "Общие рекомендации":
-        return await general_recommend_entry(update, context)
+        return await general_recommend_entry(update, context)  # ← корректный вызов
 
     else:
         await update.message.reply_text("Я не понял. Пожалуйста, выбери пункт из меню.")
@@ -109,7 +114,11 @@ def main():
             STYLE_SELECT: [
                 MessageHandler(filters.TEXT & ~filters.COMMAND, style_select),
             ],
-            STYLE_DETAIL: [
+            STYLE_DETAIL: [],
+            GENDER_SELECT: [
+                MessageHandler(
+                    filters.TEXT & ~filters.COMMAND, handle_gender_selection
+                ),
             ],
             GENERAL_RECOMMEND: [
                 MessageHandler(
@@ -122,3 +131,7 @@ def main():
 
     app.add_handler(conv_handler)
     app.run_polling()
+
+
+if __name__ == "__main__":
+    main()

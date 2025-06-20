@@ -86,10 +86,10 @@ async def handle_photo(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_photo(
             photo=photo,
             caption=f"\
-👕 {card["_Product__name"]}\n\
-⭐ Оценка: {card["_Product__review_rating"]} / 5\n\
-💰 Цена: {card["_Product__price"]} ₽\n\
-🔗 [Ссылка]({card["_Product__link"]})\
+👕 {card['_Product__name']}\n\
+⭐ Оценка: {card['_Product__review_rating']} / 5\n\
+💰 Цена: {card['_Product__price']} ₽\n\
+🔗 [Ссылка]({card['_Product__link']})\
 ",
             parse_mode="Markdown",
             reply_markup= ReplyKeyboardMarkup(

@@ -22,7 +22,6 @@ class TasksPool:
         if semaphore == None:
             return None
 
-       
         result = wb_parse(analyze_photo(path))
 
         semaphore.release()

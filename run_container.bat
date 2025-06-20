@@ -1,0 +1,1 @@
+docker run --rm -v .:/project -w /project -e HOME=/tmp -it --rm wtfbot sh

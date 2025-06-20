@@ -1,14 +1,10 @@
 ﻿
 import tensorflow as tf
 from tensorflow.keras.preprocessing import image
-import matplotlib.pyplot as plt
 import numpy as np
-from pathlib import Path
-from color_and_labels import color_names, label_names
+from core.ai.color_and_labels import color_names, label_names
 from urllib.request import urlretrieve
 import os
-from PIL import Image
-from core.task_pool.pool import file_path
 from core.parser.image import convert_to_png
 
 
@@ -16,7 +12,7 @@ from core.parser.image import convert_to_png
 def init_model():
     # путь к файлу .keras
     model_url = "https://github.com/AlexWizzarrdd/what_the_fit_bot/raw/master/src/core/ai/cloth_recognition_model.keras"
-    local_model_path = "E:\VS\Projects\PythonApplication1\cloth_recognition_model.keras"
+    local_model_path = "/project/src/core/ai/cloth_recognition_model.keras"
     if not os.path.exists(local_model_path):
         print("Скачивание модели с GitHub...")
     urlretrieve(model_url, local_model_path)
@@ -25,21 +21,19 @@ def init_model():
     return tf.keras.models.load_model(local_model_path)
 
 model = init_model()
-file_path = file_path
 def analyze_photo(file_path):
-    file_path = convert_to_png(file_path)
+    path = convert_to_png(file_path)
+
     target_size=(224, 224)
-    img = image.load_img(file_path, target_size=target_size)
+    img = image.load_img(path, target_size=target_size)
     img_array = image.img_to_array(img)
     img_array = np.expand_dims(img_array, axis=0)
     img_array /= 255.0
-    # Обработка изображения
-    processed_image = analyze_photo(file_path)
 
-    # Получение предсказания
-    predictions = model.predict(processed_image)
-    color_predictions = predictions[0]
-    label_predictions = predictions[1]
+    # Обработка изображения
+    predictions = model.predict(img_array)
+    color_predictions = predictions[1]
+    label_predictions = predictions[0]
 
     # Находим лучший цвет
     best_color_idx = np.argmax(color_predictions)
@@ -48,6 +42,9 @@ def analyze_photo(file_path):
     # Находим лучший тип товара
     best_label_idx = np.argmax(label_predictions)
     best_label_name = label_names[best_label_idx]
+
+    print(f"Predicted: {best_label_name} {best_color_name}")
+
     return f"{best_color_name} {best_label_name}"
 
 
