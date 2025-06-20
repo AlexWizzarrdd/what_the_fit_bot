@@ -65,4 +65,5 @@ def get_basket_id(product_id: int):
         return '27'
     if short_product_id < 5502:
         return '28'
-    raise ValueError("corresponding basket wasn't found")
+    else:
+        return '29'
