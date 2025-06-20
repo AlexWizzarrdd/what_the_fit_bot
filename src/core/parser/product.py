@@ -14,7 +14,8 @@ class Product:
     """
 
     ignored_attributes = ('_Product__data',
-                          '_Product__id'
+                          '_Product__id',
+                          '_Product__basket_id'
                          )
 
     def __init__(self, product_data: dict):
@@ -28,11 +29,12 @@ class Product:
         self.__price = self.__parse_price() 
         self.__review_rating = self.__data['reviewRating']
         self.__supplier_rating = self.__data['supplierRating']
+        self.__basket_id = get_basket_id(self.__id)
         self.__image_link = ( 
-            f"https://basket-{get_basket_id(self.__id)}.wbbasket.ru/vol{self.__id // 10**5}/"
+            f"https://basket-{self.__basket_id}.wbbasket.ru/vol{self.__id // 10**5}/"
             f"part{self.__id // 10**3}/{self.__id}/images/big/1.webp" 
         )
-        self.__image_path = save_image(self.__image_link)
+        self.__image_path = save_image(self.__image_link, self.__id, self.__basket_id)
 
     @property
     def product_data(self):

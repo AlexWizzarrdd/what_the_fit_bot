@@ -7,10 +7,18 @@ from core.parser.get_basket_id import get_basket_id
 import time
 import tempfile
 
-def scrap_image(image_link: str):
+def save_image(image_link: str, product_id: int, basket_id: int):
+    try:
+        image_path = scrap_image(image_link, product_id, basket_id)
+        new_image_path = convert_to_png(image_path)
+        return new_image_path
+    except Exception as exception:
+        print(f"Can't save image': {exception}")
+
+def scrap_image(image_link: str, product_id: int, basket_id: int):
     response = requests.get(image_link, stream=True)
     temp_folder = tempfile.gettempdir()
-    image_path = get_new_image_path(temp_folder, 'webp')
+    image_path = get_new_image_path(temp_folder, 'webp', product_id, basket_id)
 
     if response.status_code == 200:
         with open(image_path, "xb") as file:
@@ -33,15 +41,13 @@ def convert_to_png(image_path: str):
     except Exception as exception:
         print(f"Convertation Error: {exception}")
 
-def save_image(image_link: str):
-    try:
-        image_path = scrap_image(image_link)
-        new_image_path = convert_to_png(image_path)
-        return new_image_path
-    except Exception as exception:
-        print(f"Can't save image': {exception}")
     
-def get_new_image_path(image_folder_path: str, file_extension: str):
+def get_new_image_path(
+    image_folder_path: str, 
+    file_extension: str, 
+    product_id: int, 
+    basket_id: int
+    ):
     if not os.path.isdir(image_folder_path):
         raise ValueError("Wrong folder path!")
     if not re.match(r"[a-z]+", file_extension):
@@ -49,4 +55,4 @@ def get_new_image_path(image_folder_path: str, file_extension: str):
     image_path = os.path.join(image_folder_path, f"image.{file_extension}")
     time_stamp = time.strftime("%Y%m%d_%H%M%S")
     core, extension = os.path.splitext(image_path)
-    return f"{core}_{time_stamp}{extension}"
+    return f"{core}_{time_stamp}_{basket_id}_{product_id}{extension}"
