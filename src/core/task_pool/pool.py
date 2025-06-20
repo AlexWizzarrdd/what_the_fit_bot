@@ -2,6 +2,7 @@
 # Менеджер который перенаправляет полученные данне в указанные менеджеры
 import threading
 from core.parser.wb_parse import wb_parse
+from core.ai.image_processing import analyze_photo
 
 class TasksPool:
     def __init__(self, size):
@@ -20,9 +21,9 @@ class TasksPool:
         semaphore = self.acquire()
         if semaphore == None:
             return None
-        
-        # TODO: add ai hire
-        result = wb_parse("Серый свитер")
+
+       
+        result = wb_parse(analyze_photo(path))
 
         semaphore.release()
         

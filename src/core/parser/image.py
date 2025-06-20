@@ -33,7 +33,8 @@ def scrap_image(image_link: str, product_id: int, basket_id: int):
 def convert_to_png(image_path: str):
     try:
         image = Image.open(image_path)
-        new_image_path = re.sub("webp", "png", image_path)
+        #new_image_path = re.sub("webp", "png", image_path)
+        new_image_path = os.path.splitext(image_path)[0] + '.png'
         image.save(new_image_path)
         os.remove(image_path)
         print(f"The image was successfully converted and saved as {new_image_path}")
